@@ -77,6 +77,15 @@ app.get('/grafica', (req, res) => {
 
 app.post('/insertar', (req, res) => {
   const db = getDB();
+
+  // Mostrar datos recibidos para depuración
+  console.log('Datos recibidos en /insertar:', req.body);
+
+  // Verificación rápida de campos requeridos
+  if (!req.body.temp || !req.body.dist || !req.body.nivelAgua || !req.body.cantidadAgua || !req.body.porcentajeLlenado) {
+    return res.status(400).send({ error: 'Faltan campos en la solicitud', bodyRecibido: req.body });
+  }
+
   const data = {
     fecha: new Date().toJSON(),
     temp: req.body.temp,
@@ -85,10 +94,12 @@ app.post('/insertar', (req, res) => {
     cantidadAgua: req.body.cantidadAgua,
     porcentajeLlenado: req.body.porcentajeLlenado
   };
+
   db.collection('Valores').add(data)
     .then(() => res.send({ ...data, status: 'Valores insertados!' }))
-    .catch(error => res.status(500).send({ error: 'Error al insertar', details: error }));
+    .catch(error => res.status(500).send({ error: 'Error al insertar', details: error.message }));
 });
+
 
 app.post('/encender', (req, res) => {
   const db = getDB();
