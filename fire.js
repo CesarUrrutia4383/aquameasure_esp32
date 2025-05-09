@@ -1,10 +1,8 @@
-require('dotenv').config();
-
-const firebase = require('firebase/app');
-require('firebase/firestore');
+const firebase = require('firebase');  // No usar admin, usar firebase
+require('firebase/firestore'); // Para usar Firestore
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.FIREBASE_API_KEY,  // Puedes usar las variables de entorno
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
   projectId: process.env.FIREBASE_PROJECT_ID,
   storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
@@ -12,12 +10,13 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 };
 
-const app = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
-
-// Solo la inicialización debe ocurrir aquí, sin llamar a settings() después
+// Inicializa Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app(); // Usa la app ya inicializada si existe
+}
 
 const db = firebase.firestore();
 
-module.exports = { firebase, db };
+module.exports = db;

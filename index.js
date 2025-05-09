@@ -17,9 +17,7 @@ app.get('/', (req, res) => {
 });
 
 const getDB = () => {
-  const db = fire.firestore();
-  db.settings({ timestampsInSnapshots: true });
-  return db;
+  return fire;
 };
 
 app.get('/ver', (req, res) => {
