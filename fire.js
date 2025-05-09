@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const firebase = require('firebase/app');
 require('firebase/firestore');
 
@@ -10,5 +12,12 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID
 };
 
-const fire = firebase.initializeApp(firebaseConfig);
-module.exports = fire;
+const app = !firebase.apps.length
+  ? firebase.initializeApp(firebaseConfig)
+  : firebase.app();
+
+// Solo la inicialización debe ocurrir aquí, sin llamar a settings() después
+
+const db = firebase.firestore();
+
+module.exports = { firebase, db };
