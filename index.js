@@ -1,7 +1,7 @@
 require('dotenv').config(); // Cargar variables .env
 const express = require('express');
 const PORT = process.env.PORT || 5000;
-const fire = require('./firebase');
+const fire = require('./fire');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
