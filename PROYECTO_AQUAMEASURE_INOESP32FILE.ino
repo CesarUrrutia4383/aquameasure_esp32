@@ -8,8 +8,8 @@
 #define DHT_PIN 4
 #define DHT_TYPE DHT11
 
-const char* ssid = "FGU_24";//CREDENCIALES WIFI
-const char* password = "ZM5L33VnsQ";
+const char* ssid = "";//CREDENCIALES WIFI
+const char* password = "";
 
 DHT dht(DHT_PIN, DHT_TYPE);
 
@@ -20,7 +20,7 @@ unsigned long previousMillis = 0;//INTERVALO DE ENVIO
 const long interval = 30000; // Y LECTURA DE DATOS
 
 //LINK DE INSERCION DE DATOS EN EL API
-const char* serverURL = "https://aquameasure-esp32.onrender.com/insertar";
+const char* serverURL = "";
 
 void setup() {
   Serial.begin(115200);
